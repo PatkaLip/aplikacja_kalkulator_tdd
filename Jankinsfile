@@ -27,8 +27,8 @@ pipeline {
                     stage('TEST F1') {
                         steps {
                             script {
-                                sh 'python3.8 -m pylint ---html=pylint_report.html'
-                                sh 'python3.8 -m pytest --html=report.html'
+                                sh 'python3.8 -m pylint *.py --html=pylint_report.html'
+                                sh 'python3.8 -m pytest *.py --html=report.html'
                                 archiveArtifacts artifacts: 'report.html, assets', followSymlinks: false
                             }
                         }       
@@ -39,8 +39,8 @@ pipeline {
                     stage('TEST F2') {
                         steps {
                             script {
-                                sh 'python3.8 -m pylint ---html=pylint_report.html'
-                                sh 'python3.8 -m pytest --html=report.html'
+                                sh 'python3.8 -m pylint *.py --html=pylint_report.html'
+                                sh 'python3.8 -m pytest *.py --html=report.html'
                                 archiveArtifacts artifacts: 'report.html, assets', followSymlinks: false
                             }
                         }       
@@ -52,8 +52,8 @@ pipeline {
                         
                         steps {
                             script {
-                                sh 'python3.8 -m pylint ---html=pylint_report.html'
-                                sh 'python3.8 -m pytest --html=report.html'
+                                sh 'python3.8 -m pylint *.py --html=pylint_report.html'
+                                sh 'python3.8 -m pytest *.py --html=report.html'
                                 archiveArtifacts artifacts: 'report.html, assets', followSymlinks: false
                             }
                         }       
