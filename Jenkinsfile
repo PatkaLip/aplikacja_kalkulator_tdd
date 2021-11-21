@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Choose branch name') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*$BRANCH]], extensions: [], userRemoteConfigs: [[url: 'https://github.com/PatkaLip/aplikacja_kalkulator_tdd.git']]])
+                git branch: "${params.BRANCH}", url: 'https://github.com/PatkaLip/aplikacja_kalkulator_tdd.git'
             }
         }
         stage('Example Test') {
