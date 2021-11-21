@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'python -m pylint --rcfile=.pylintrc --exit-zero ${MODULE} > ${WORKSPACE}/pylint.log'
+                sh 'python3.8 -m pylint --rcfile=.pylintrc --exit-zero ${MODULE} > ${WORKSPACE}/pylint.log'
                 sh 'python3.8 -m pytest --html=report.html'
                 archiveArtifacts artifacts: 'report.html, assets', followSymlinks: false
             }
