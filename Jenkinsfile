@@ -14,10 +14,20 @@ pipeline {
                 git branch: "${params.BRANCH}", url: 'https://github.com/PatkaLip/aplikacja_kalkulator_tdd.git'
             }
         }
-        stage('Example Test') {
+        stage('Choose smoke/regression/nightly') {
             steps {
-                echo 'Hello, JDK'
+                echo 'TODO'
             }
+        }
+        stage('Test') {
+            steps {
+                sh 'python -m pylint --rcfile=.pylintrc --exit-zero ${MODULE} > ${WORKSPACE}/pylint.log'
+                sh 'python3.8 -m pytest --html=report.html'
+                archiveArtifacts artifacts: 'report.html, assets', followSymlinks: false
+            }
+            
+            
+            
         }
     }
 }
