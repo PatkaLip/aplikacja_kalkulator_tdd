@@ -60,11 +60,10 @@ pipeline {
                     }
             }
         }
-        stage ('Starting next job') {
-            steps{
-                when { expression { params.Test}}
-                build 'html_storage'
-            }
-        }    
+    }
+    post {
+        always{
+            build 'html_storage'
+        }
     }
 }
