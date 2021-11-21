@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'python3.8 -m pylint ---html=pylint_report.html'
+                // sh 'python3.8 -m pylint ---html=pylint_report.html'
                 sh 'python3.8 -m pytest --html=report.html'
                 archiveArtifacts artifacts: 'report.html, assets', followSymlinks: false
             }
