@@ -20,14 +20,49 @@ pipeline {
             }
         }
         stage('Test') {
-            steps {
-                // sh 'python3.8 -m pylint ---html=pylint_report.html'
-                // sh 'python3.8 -m pytest --html=report.html'
-                // archiveArtifacts artifacts: 'report.html, assets', followSymlinks: false
+            parallel {
+                    when {
+                        expression { params.CHOICE == 'Nightly' || params.CHOICE == 'Regression'}
+                    }
+                    stage('TEST F1') {
+                        steps {
+                            script {
+                                sh 'python3.8 -m pylint ---html=pylint_report.html'
+                                sh 'python3.8 -m pytest --html=report.html'
+                                archiveArtifacts artifacts: 'report.html, assets', followSymlinks: false
+                            }
+                        }       
+                    }
+                    when {
+                        expression { params.CHOICE == 'Nightly' }
+                    }
+                    stage('TEST F2') {
+                        steps {
+                            script {
+                                sh 'python3.8 -m pylint ---html=pylint_report.html'
+                                sh 'python3.8 -m pytest --html=report.html'
+                                archiveArtifacts artifacts: 'report.html, assets', followSymlinks: false
+                            }
+                        }       
+                    }
+                    when {
+                        expression { params.CHOICE == 'Nightly' }
+                    }
+                    stage('TEST F3') {
+                        
+                        steps {
+                            script {
+                                sh 'python3.8 -m pylint ---html=pylint_report.html'
+                                sh 'python3.8 -m pytest --html=report.html'
+                                archiveArtifacts artifacts: 'report.html, assets', followSymlinks: false
+                            }
+                        }       
+                    }
             }
         }
         stage ('Starting next job') {
             steps{
+                when { expression { params.Test}}
                 build 'html_storage'
             }
         }    
