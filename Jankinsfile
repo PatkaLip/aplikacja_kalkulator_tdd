@@ -31,8 +31,5 @@ pipeline {
                 build 'html_storage'
             }
         }    
-            
-            
-        }
     }
 }
