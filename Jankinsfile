@@ -25,6 +25,7 @@ pipeline {
                 // sh 'python3.8 -m pytest --html=report.html'
                 // archiveArtifacts artifacts: 'report.html, assets', followSymlinks: false
             }
+        }
         stage ('Starting next job') {
             steps{
                 build 'html_storage'
